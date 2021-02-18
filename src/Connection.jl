@@ -14,9 +14,9 @@ struct AmqpConnectionDef
     AmqpConnectionDef(host,auth_params) = new("/",host,AMQPClient.AMQP_DEFAULT_PORT,auth_params,Nothing())
 end
 
-function AMQPClient.connection(conn_def::AmqpConnectionDef)
+AMQPClient.connection(conn_def::AmqpConnectionDef) =
     connection(; virtualhost=conn_def.virtualhost, host=conn_def.host, port=conn_def.port, auth_params=conn_def.auth_params, amqps=conn_def.amqps)
-end
+
 
 function close_connection(conn)
     if isopen(conn)
