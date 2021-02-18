@@ -25,7 +25,7 @@ function close_connection!(conn)
 end
 
 function amqp_connection!(f::Function, conn_def::AmqpConnectionDef)
-    conn = connection(conn_def)
+    conn = connection!(conn_def)
     try
         f(conn)
     finally
