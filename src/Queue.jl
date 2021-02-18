@@ -7,6 +7,7 @@ end
 function declare_queue!(chan, queue)
     success, queue_name, message_count, consumer_count = queue_declare(chan, queue)
     success || throw(QueueDeclarationError(queue_name))
+    queue_name
 end
 
 serialize(serializable::String) = Vector{UInt8}(serializable)
