@@ -11,7 +11,7 @@ struct AmqpConnectionDef
     port::Int64
     auth_params::Dict{String,Any}
     amqps::Union{Nothing, MbedTLS.SSLConfig}
-    AmqpConnectionDef(host,port,auth_params) = new("/",host,AMQPClient.AMQP_DEFAULT_PORT,auth_params,Nothing())
+    AmqpConnectionDef(host,auth_params) = new("/",host,AMQPClient.AMQP_DEFAULT_PORT,auth_params,Nothing())
 end
 
 function AMQPClient.connection(conn_def::AmqpConnectionDef)
