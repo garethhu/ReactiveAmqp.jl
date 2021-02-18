@@ -1,9 +1,8 @@
 using AMQPClient
 using MbedTLS
 
-function compose_auth(user::String,password::String)
+compose_auth(user::String,password::String) =
     Dict{String,Any}("MECHANISM"=>"AMQPLAIN", "LOGIN"=>user, "PASSWORD"=>password)
-end
 
 struct AmqpConnectionDef
     virtualhost::String
