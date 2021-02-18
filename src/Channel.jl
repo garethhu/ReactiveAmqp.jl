@@ -12,7 +12,7 @@ function close_channel!(chan)
 end
 
 function amqp_channel!(f::Function, conn)
-    chan = channel(conn)
+    chan = channel!(conn)
     try
         f(chan)
     finally
