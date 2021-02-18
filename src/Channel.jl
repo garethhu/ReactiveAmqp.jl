@@ -1,8 +1,8 @@
 using AMQPClient
 
-function AMQPClient.channel(conn)
+AMQPClient.channel(conn) =
     channel(conn, AMQPClient.UNUSED_CHANNEL, true)
-end
+
 
 function close_channel(chan)
     if isopen(chan)
