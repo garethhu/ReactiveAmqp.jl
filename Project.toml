@@ -6,3 +6,8 @@ version = "0.1.0"
 [deps]
 AMQPClient = "79c8b4cd-a41a-55fa-907c-fab5288e1383"
 MbedTLS = "739be429-bea8-5141-9913-cc70e7f3736d"
+
+[compat]
+AMQPClient = "0.4"
+MbedTLS = "1.0"
+julia = "^1"
