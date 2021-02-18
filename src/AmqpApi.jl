@@ -1,0 +1,4 @@
+module AmqpApi
+
+
+end
