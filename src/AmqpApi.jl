@@ -1,5 +1,8 @@
 module AmqpApi
 
+using AMQPClient
+using MbedTLS
+
 export AmqpConnectionDef, amqp_connection, amqp_channel, declare_queue
 
 struct AmqpConnectionDef
