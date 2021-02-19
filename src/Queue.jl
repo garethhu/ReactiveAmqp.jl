@@ -10,6 +10,7 @@ function declare_queue!(chan, queue)
     queue_name
 end
 
+serialize(serializable::Vector{UInt8}) = serializable
 serialize(serializable::String) = Vector{UInt8}(serializable)
 
 compose(message::T where T) = Message(serialize(message), content_type="text/plain", delivery_mode=PERSISTENT)
