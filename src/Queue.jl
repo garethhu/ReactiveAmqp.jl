@@ -1,5 +1,7 @@
 using AMQPClient
 
+const DLQ_EXCHANGE = "DLQ"
+
 struct QueueDeclarationError <: Exception
     queue_name::String
 end
@@ -20,3 +22,24 @@ send!(chan,exchange::String, message::T where T, routing_key::String) =
 
 send!(chan,exchange::String, message::T where T) =
     send!(chan,exchange, message, "*")
+
+AckUnit(::Type{Message}, src) =
+    msg::Message -> AckUnit{Message}(msg, () -> src.dlFn(msg.data,msg.delivery_tag), () -> src.ackFn(msg.delivery_tag))
+
+struct QueueSource <: Source{Message}
+    name::String
+    dlq::String
+    pollFn::Function
+    dlFn::Function
+    ackFn::Function
+    QueueSource(chan, name) = begin
+        dlq = name * "-dlq"
+        consumer_amqp_config!(chan, name, dlq)
+        pollFn = () -> basic_get(chan, name, false)
+        ackFn = ack_handle -> basic_ack(chan, ack_handle)
+        dlFn = (msg_data, ack_handle) -> (send!(chan, DLQ_EXCHANGE, msg_data, dlq); ackFn(ack_handle))
+        new(name, dlq, pollFn, dlFn, ackFn)
+    end
+end
+
+queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
