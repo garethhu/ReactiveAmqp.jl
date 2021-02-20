@@ -43,3 +43,11 @@ struct QueueSource <: Source{Message}
 end
 
 queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
+
+function execute_single_queue!(queue::Function)
+    amqp_connection!(conn_def) do conn
+        amqp_channel!(conn) do chan
+            queue(chan)
+        end
+    end
+end
