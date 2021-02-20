@@ -44,7 +44,7 @@ end
 
 queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
 
-function execute_single_queue!(queue::Function)
+function execute_single_queue!(conn_def, queue::Function)
     amqp_connection!(conn_def) do conn
         amqp_channel!(conn) do chan
             queue(chan)
