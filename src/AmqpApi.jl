@@ -3,8 +3,8 @@ module AmqpApi
 include("Connection.jl")
 include("Channel.jl")
 include("Exchange.jl")
-include("Queue.jl")
 include("Reactive.jl")
+include("Queue.jl")
 include("Consumer.jl")
 
 export AmqpConnectionDef, compose_auth
