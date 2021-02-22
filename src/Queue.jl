@@ -52,7 +52,7 @@ function execute_queues!(conn_def)
     @async begin
         amqp_connection!(conn_def) do conn
             amqp_channel!(conn) do chan
-                Theads.@spawn for _flow in _flows
+                Threads.@spawn for _flow in _flows
                     _flow(chan)
                 end
             end
