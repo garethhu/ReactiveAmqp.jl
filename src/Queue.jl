@@ -49,7 +49,7 @@ _queues = []
 queue!(queue::Function) = push!(_queues, queue)
 
 function execute_queues!()
-    @async begin
+    begin
         amqp_connection!(_conn_def) do conn
             amqp_channel!(conn) do chan
                 Threads.@spawn for queue in _queues
