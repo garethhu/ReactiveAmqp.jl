@@ -53,7 +53,7 @@ function execute_queues!()
         amqp_connection!(_conn_def) do conn
             amqp_channel!(conn) do chan
                 Threads.@spawn for queue in _queues
-                    queue(chan)
+                    queue($chan)
                 end
             end
         end
