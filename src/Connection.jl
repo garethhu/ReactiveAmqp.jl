@@ -35,6 +35,6 @@ end
 
 _conn_def = Nothing
 
-function amqp_define!(conn_def::AmqpConnectionDef)
+function amqp_conn_define!(conn_def::AmqpConnectionDef)
     _conn_def = conn_def
 end
