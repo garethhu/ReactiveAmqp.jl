@@ -1,14 +1,15 @@
 module AmqpApi
 
+include("ReactiveFlows.jl")
 include("Connection.jl")
 include("Channel.jl")
 include("Exchange.jl")
-include("Reactive.jl")
 include("Queue.jl")
 include("Consumer.jl")
 
-export AmqpConnectionDef, compose_auth
-export queue_source!, execute_single_queue!
+export AmqpConnectionDef, compose_auth, amqp_define!
+export queue_source!, queue!, execute_queues!
 export map_ack, safe_map_ack!
+
 
 end

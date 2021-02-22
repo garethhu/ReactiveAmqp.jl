@@ -32,3 +32,9 @@ function amqp_connection!(f::Function, conn_def::AmqpConnectionDef)
         close_connection!(conn)
     end
 end
+
+_conn_def::AmqpConnectionDef
+
+function amqp_define!(conn_def::AmqpConnectionDef)
+    _conn_def = conn_def
+end

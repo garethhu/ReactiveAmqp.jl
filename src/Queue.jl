@@ -44,16 +44,16 @@ end
 
 queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
 
-_flows = []
+_queues = []
 
-flow!(flow::Function) = push!(_flows, flow)
+queue!(queue::Function) = push!(_flows, flow)
 
-function execute_queues!(conn_def)
+function execute_queues!()
     @async begin
-        amqp_connection!(conn_def) do conn
+        amqp_connection!(_conn_def) do conn
             amqp_channel!(conn) do chan
-                Threads.@spawn for _flow in _flows
-                    _flow(chan)
+                Threads.@spawn for queue in _queues
+                    queue(chan)
                 end
             end
         end
