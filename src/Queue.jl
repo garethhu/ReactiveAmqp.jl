@@ -48,7 +48,7 @@ _flows = []
 
 flow(flow::Function) = push!(_flows, flow)
 
-function execute_queues!(conn_def, queue::Function)
+function execute_queues!(conn_def)
     @async begin
         amqp_connection!(conn_def) do conn
             amqp_channel!(conn) do chan
