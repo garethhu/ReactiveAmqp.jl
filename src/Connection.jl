@@ -33,7 +33,7 @@ function amqp_connection!(f::Function, conn_def::AmqpConnectionDef)
     end
 end
 
-_conn_def::AmqpConnectionDef
+_conn_def = Nothing
 
 function amqp_define!(conn_def::AmqpConnectionDef)
     _conn_def = conn_def
