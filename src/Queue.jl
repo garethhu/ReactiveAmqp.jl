@@ -46,7 +46,7 @@ queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
 
 _queues = []
 
-queue!(queue::Function) = push!(_queues, queue)
+queue!(queue::Function) = push!(global _queues, queue)
 
 function execute_queues!()
     @async begin
