@@ -46,7 +46,7 @@ queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
 
 _flows = []
 
-flow(flow::Function) = push!(_flows, flow)
+flow!(flow::Function) = push!(_flows, flow)
 
 function execute_queues!(conn_def)
     @async begin
