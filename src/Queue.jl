@@ -1,4 +1,7 @@
 using AMQPClient
+using JSON
+using Unmarshal
+using DataFrames
 
 const DLQ_EXCHANGE = "DLQ"
 
@@ -42,7 +45,13 @@ struct QueueSource <: Source{Message}
     end
 end
 
-queue_source!(chan, name::String) = ack_source!(QueueSource(chan, name))
+source!(chan, name::String) = ack_source!(QueueSource(chan, name))
+source!(chan, name::String, type::Type{String}) = source!(chan, name) |> map_ack(String, msg -> String(msg.data))
+source!(chan, name::String, type::Type{Dict{String,Any}}) = source!(chan, name, String) |> safe_map_ack!(Dict{String,Any}, msg -> JSON.parse(msg))
+source!(chan, name::String, type::Type{DataFrame}) = source!(chan, name, Dict{String,Any}) |> safe_map_ack!(DataFrame, msg -> DataFrame(msg))
+source!(chan, name::String, unmar::Type{T}) where T = source!(chan, name, Dict{String,Any}) |> safe_map_ack!(type, msg -> Unmarshal.unmarshal(type, msg))
+
+
 
 _queues = []
 
@@ -53,11 +62,12 @@ function execute_queues!()
     @async begin
         amqp_connection!(_conn_def) do conn
             @sync for queue in _queues
-                 push!(tasks,
+                 @async push!(tasks,
                     Threads.@spawn amqp_channel!(conn) do chan
                         queue(chan)
                     end)
             end
+
         end
     end
     return tasks
