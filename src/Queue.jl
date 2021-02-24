@@ -49,13 +49,16 @@ _queues = []
 queue!(queue::Function) = push!(_queues, queue)
 
 function execute_queues!()
+    tasks = Task[]
     @async begin
         amqp_connection!(_conn_def) do conn
             amqp_channel!(conn) do chan
                 @sync for queue in _queues
-                    Threads.@spawn @async queue(chan)
+                    @async push!(tasks, Threads.@spawn queue(chan))
+                    sleep(1)
                 end
             end
         end
     end
+    return tasks
 end
