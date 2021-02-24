@@ -52,11 +52,11 @@ function execute_queues!()
     tasks = Task[]
     @async begin
         amqp_connection!(_conn_def) do conn
-            amqp_channel!(conn) do chan
-                @sync for queue in _queues
-                    @async push!(tasks, Threads.@spawn queue(chan))
-                    sleep(1)
-                end
+            @sync for queue in _queues
+                 push!(tasks,
+                    Threads.@spawn amqp_channel!(conn) do chan
+                        queue(chan)
+                    end)
             end
         end
     end
