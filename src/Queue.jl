@@ -51,8 +51,6 @@ source!(chan, name::String, type::Type{Dict{String,Any}}) = source!(chan, name, 
 source!(chan, name::String, type::Type{DataFrame}) = source!(chan, name, Dict{String,Any}) |> safe_map_ack!(DataFrame, msg -> DataFrame(msg))
 source!(chan, name::String, unmar::Type{T}) where T = source!(chan, name, Dict{String,Any}) |> safe_map_ack!(type, msg -> Unmarshal.unmarshal(type, msg))
 
-
-
 _queues = []
 
 queue!(queue::Function) = push!(_queues, queue)
