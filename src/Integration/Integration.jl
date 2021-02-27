@@ -1,9 +1,7 @@
 module Integration
 
-using Reexport
-
 include("InitFiles.jl")
 
-@reexport using InitFiles
+export init_config!
 
 end
