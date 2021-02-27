@@ -1,7 +1,8 @@
 module ReactiveAmqp
 
 dir = @__DIR__
-export dir
+root = dirname(dirname(@__FILE__))
+export dir, root
 
 include("includes.jl")
 
