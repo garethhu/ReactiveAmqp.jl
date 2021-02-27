@@ -15,10 +15,10 @@ amqp_conn_define!(conn_def)
 
 queue!(chan -> source!(chan, "testQueue", String) |>
 safe_map_ack!(String, msg -> msg != "bye" ? msg : error("bye"), (e) -> ()) |>
-unit -> (unit.ackFn(); Nothing))
+unit -> unit.ackFn())
 
 queue!(chan -> source!(chan, "test1Queue", Dict{String,Any}) |>
-unit -> (unit.ackFn(); Nothing))
+unit -> unit.ackFn())
 
 tasks = execute_queues!()
 
