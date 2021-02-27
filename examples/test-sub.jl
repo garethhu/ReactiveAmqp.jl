@@ -1,9 +1,4 @@
-include("../src/ReactiveFlows.jl")
-include("../src/Connection.jl")
-include("../src/Channel.jl")
-include("../src/Exchange.jl")
-include("../src/Queue.jl")
-include("../src/Consumer.jl")
+include("../src/includes.jl")
 
 user = "guest"  # default is usually "guest"
 password = "guest"  # default is usually "guest"

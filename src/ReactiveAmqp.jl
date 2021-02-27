@@ -1,11 +1,6 @@
 module ReactiveAmqp
 
-include("ReactiveFlows.jl")
-include("Connection.jl")
-include("Channel.jl")
-include("Exchange.jl")
-include("Queue.jl")
-include("Consumer.jl")
+include("includes.jl")
 
 export AmqpConnectionDef, compose_auth, amqp_conn_define!
 export source!, queue!, execute_queues!
