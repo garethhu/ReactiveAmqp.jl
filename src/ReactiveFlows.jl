@@ -59,3 +59,5 @@ function handle!(source, fun::Function)
 end
 
 Base.:|>(source, successFn::Function) = handle!(source, successFn)
+
+sink!(sinkFn::Function) = unit -> (sinkFn(unit.val);unit.ackFn())
