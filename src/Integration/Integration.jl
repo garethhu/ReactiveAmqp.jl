@@ -1,6 +1,6 @@
 module Integration
 
-include("../InitFiles.jl")
+include("InitFiles.jl")
 
 export init_config!
 
