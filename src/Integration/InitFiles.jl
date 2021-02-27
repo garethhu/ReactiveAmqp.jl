@@ -1,7 +1,3 @@
-module InitFiles
-
-export init_config!
-
 include("constants.jl")
 
 function init_config!()
@@ -9,6 +5,4 @@ function init_config!()
     from_location = joinpath(PKG_ROOT, NEW_APP_PATH)
     template_struct = joinpath(from_location,"*")
     cp(template_struct, project_root)
-end
-
 end
