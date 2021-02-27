@@ -1,1 +1,1 @@
-# AmqpApi
+# ReactiveAmqp.jl
