@@ -1,5 +1,8 @@
 module ReactiveAmqp
 
+dir = @__DIR__
+export dir
+
 include("includes.jl")
 
 export AmqpConnectionDef, compose_auth, amqp_conn_define!
