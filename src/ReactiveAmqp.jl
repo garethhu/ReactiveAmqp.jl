@@ -1,4 +1,4 @@
-module AmqpApi
+module ReactiveAmqp
 
 include("ReactiveFlows.jl")
 include("Connection.jl")
