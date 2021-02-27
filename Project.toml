@@ -6,6 +6,7 @@ version = "0.1.0"
 [deps]
 AMQPClient = "79c8b4cd-a41a-55fa-907c-fab5288e1383"
 MbedTLS = "739be429-bea8-5141-9913-cc70e7f3736d"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Rocket = "df971d30-c9d6-4b37-b8ff-e965b2cb3a40"
 
 [compat]
