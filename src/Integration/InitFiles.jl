@@ -1,7 +1,6 @@
 include("constants.jl")
 
 function init_config!()
-    println(PKG_ROOT)
     project_root = pwd()
     from_location = joinpath(PKG_ROOT, NEW_APP_PATH)
     println(project_root)
@@ -11,11 +10,14 @@ end
 
 function dir_cp(src::String, dest::String)
     for (root, dirs, files) in walkdir(src)
-        mkdir(joinpath(dest, basename(root)))
+        for dir in dirs
+            mkdir(joinpath(dest, dir))
+        end
         for file in files
-            println("source: " * joinpath(root,file))
-            println("dest: " * joinpath(dest,file))
-            cp(joinpath(root,file), joinpath(dest,file))
+            cp(joinpath(root,file), joinpath(dest, file))
+        end
+        for dir in dirs
+            dir_cp(joinpath(root, dir), joinpath(dest, dir))
         end
     end
 end
