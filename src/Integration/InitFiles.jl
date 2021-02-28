@@ -1,9 +1,8 @@
 include("constants.jl")
 
 function init_config!()
-    project_root = pwd()
     from_location = joinpath(PKG_ROOT, NEW_APP_PATH)
-    println(project_root)
+    println(PROJ_ROOT)
     println(from_location)
     dir_cp(from_location, project_root)
 end
