@@ -23,7 +23,7 @@ sink!(msg -> println(msg)))
 ```
 
 
-In the above example we get a string source from a queue called 'testQueue', we then convert it to lowercase and if the message is bye, then we raise an error, which will result in a DLQ message to the testQueue-dlq queue, we then print the message. The flow handles acking back to the AMQP client queue on successful completion of the sink function, or successful posting to the DLQ.
+In the above example we get a string source from a queue called 'testQueue', we then convert it to lowercase and if the message is bye, then we raise an error, which will result in a DLQ message to the testQueue-dlq queue, we then print the message. The flow handles acking back to the AMQP client queue on successful completion of the sink function, or successful posting to the DLQ. Note: the types provided as the first argument of the map functions is the return type of the supplied function.
 
 Other data types are also supported by the `source!` function, including JSON, DataFrames, and Julia data types. For Dataframe and Julia types, the messages from the AMQP cient are deserialised as JSON for compatibility, so submissions for these source types to the client should be JSON.
 
