@@ -14,6 +14,7 @@ init_config!()
 This will generate an amqp directory in the project directory with a connection.yaml file within in, in which you can define the parameters of environment specific configurations, defaulting to 'dev'. 
 
 Queues can be defined in the following way:
+
 `
 queue!(chan -> source!(chan, "testQueue", String) |>
 map_ack!(String, msg -> lowercase(msg))
