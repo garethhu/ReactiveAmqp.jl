@@ -6,5 +6,14 @@ function init_config!()
     template_struct = joinpath(from_location,"*")
     println(project_root)
     println(from_location)
-    cp(template_struct, project_root)
+    dir_cp(template_struct, project_root)
+end
+
+function dir_cp(src::string, dest::string)
+    for (root, dirs, files) in walkdir(src)
+        mkdir(joinpath(dest, basename(root)))
+        for file in files
+            cp(joinpath(root,file), joinpath(dest,file))
+        end
+    end
 end
