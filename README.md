@@ -38,8 +38,8 @@ source!(chan, "test1Queue", DataFrame)
 ```
 
 Julia Types: 
-```
-julia source!(chan, "test1Queue", T)
+```julia 
+source!(chan, "test1Queue", T)
 ```
 
 ## Additional Information
