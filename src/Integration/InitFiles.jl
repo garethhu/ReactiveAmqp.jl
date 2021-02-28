@@ -6,7 +6,7 @@ function init_config!()
     from_location = joinpath(PKG_ROOT, NEW_APP_PATH)
     println(project_root)
     println(from_location)
-    # dir_cp(from_location, project_root)
+    dir_cp(from_location, project_root)
 end
 
 function dir_cp(src::String, dest::String)
