@@ -3,6 +3,10 @@ include("AmqpConfigLoad.jl")
 
 try
     loadConfig()
-catch e::FileNotFoundError
-    @info "Config file not found at: " * e.filepath
+catch e
+    if isa(e, FileNotFoundError)
+        @info "Config file not found at: " * e.filepath
+    else
+        throw(e)
+    end
 end
