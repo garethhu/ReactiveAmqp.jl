@@ -8,6 +8,7 @@ AMQPClient = "79c8b4cd-a41a-55fa-907c-fab5288e1383"
 MbedTLS = "739be429-bea8-5141-9913-cc70e7f3736d"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Rocket = "df971d30-c9d6-4b37-b8ff-e965b2cb3a40"
+YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [compat]
 AMQPClient = "0.4"
