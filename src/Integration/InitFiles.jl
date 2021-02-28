@@ -18,5 +18,4 @@ function dir_cp(src::String, dest::String)
     for dir in dirs
         dir_cp(joinpath(src, dir), joinpath(dest, dir))
     end
-    end
 end
