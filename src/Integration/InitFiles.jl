@@ -13,6 +13,8 @@ function dir_cp(src::String, dest::String)
     for (root, dirs, files) in walkdir(src)
         mkdir(joinpath(dest, basename(root)))
         for file in files
+            println("source: " * joinpath(root,file))
+            println("dest: " * joinpath(dest,file))
             cp(joinpath(root,file), joinpath(dest,file))
         end
     end
