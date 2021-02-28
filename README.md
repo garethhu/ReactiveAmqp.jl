@@ -26,7 +26,9 @@ In the above example we get a string source from a queue called 'testQueue', we 
 Other data types are also supported by the `source!` function, including JSON, DataFrames, and Julia data types. For Dataframe and Julia types, the messages from the AMQP cient are deserialised as JSON for compatibility, so submissions for these source types to the client should be JSON.
 
 JSON: `source!(chan, "test1Queue", Dict{String,Any})`
+
 DataFrame: `source!(chan, "test1Queue", DataFrame)`
+
 Julia Types: `source!(chan, "test1Queue", T)`
 
 ## Additional Information
