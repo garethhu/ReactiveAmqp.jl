@@ -1,11 +1,7 @@
 name = "ReactiveAmqp"
 uuid = "5975aaa5-7812-4a15-bbc3-be7bca294bc6"
 authors = ["dev "]
-<<<<<<< HEAD
 version = "0.2.0"
-=======
-version = "0.1.1"
->>>>>>> master
 
 [deps]
 AMQPClient = "79c8b4cd-a41a-55fa-907c-fab5288e1383"
