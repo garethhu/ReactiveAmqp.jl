@@ -1,0 +1,14 @@
+dev:
+    user: "guest"
+    password: "guest"
+    host: "127.0.0.1"
+
+prod:
+    user:
+    password:
+    host:
+
+test:
+    user:
+    password:
+    host:
