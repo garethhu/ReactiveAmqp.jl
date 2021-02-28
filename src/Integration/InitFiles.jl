@@ -6,15 +6,17 @@ function init_config!()
 end
 
 function dir_cp(src::String, dest::String)
-    for (root, dirs, files) in walkdir(src)
-        for dir in dirs
-            mkdir(joinpath(dest, dir))
-        end
-        for file in files
-            cp(joinpath(root,file), joinpath(dest, file))
-        end
-        for dir in dirs
-            dir_cp(joinpath(root, dir), joinpath(dest, dir))
-        end
+    items = readdir(src)
+    dirs = filter(item -> isdir(joinpath(src,item)), items)
+    files = filter(item -> isfile(joinpath(src,item)), items)
+    for dir in dirs
+        mkdir(joinpath(dest, dir))
+    end
+    for file in files
+        cp(joinpath(src,file), joinpath(dest, file))
+    end
+    for dir in dirs
+        dir_cp(joinpath(src, dir), joinpath(dest, dir))
+    end
     end
 end
