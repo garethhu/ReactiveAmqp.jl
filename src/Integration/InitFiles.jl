@@ -9,7 +9,7 @@ function init_config!()
     dir_cp(template_struct, project_root)
 end
 
-function dir_cp(src::string, dest::string)
+function dir_cp(src::String, dest::String)
     for (root, dirs, files) in walkdir(src)
         mkdir(joinpath(dest, basename(root)))
         for file in files
