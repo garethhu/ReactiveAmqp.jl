@@ -1,5 +1,5 @@
 const AMQP_ENV_KEY = "AMQP_ENV"
-const AMQP_CF_FILEPATH_KEY = "AMQP_CF_FILEPATH_KEY"
+const AMQP_CF_FILEPATH_KEY = "AMQP_CONN_FILE_PATH"
 
 const PKG_ROOT = dirname(dirname(@__DIR__))
 const PROJ_ROOT = pwd()
