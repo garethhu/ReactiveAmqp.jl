@@ -37,11 +37,12 @@ struct QueueSource <: Source{Message}
     dlFn::Function
     ackFn::Function
     QueueSource(chan, name) = begin
-        dlq = name * "-dlq"
-        consumer_amqp_config!(chan, name, dlq)
+        consumer_amqp_config!(chan, name)
+        dlq_amqp_config!(chan, name)
+        dlq_sink = dlq_sink!(name)
         pollFn = () -> basic_get(chan, name, false)
         ackFn = ack_handle -> basic_ack(chan, ack_handle)
-        dlFn = (msg_data, ack_handle) -> (send!(chan, DLQ_EXCHANGE, msg_data, dlq); ackFn(ack_handle))
+        dlFn = (msg_data, ack_handle) -> (dlq_sink.sendFn(msg_data); ackFn(ack_handle))
         new(name, dlq, pollFn, dlFn, ackFn)
     end
 end
