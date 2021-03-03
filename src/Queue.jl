@@ -17,13 +17,14 @@ end
 
 serialize(serializable::Vector{UInt8}) = serializable
 serialize(serializable::String) = Vector{UInt8}(serializable)
+serialize(serializable::Int) = serialize(string(serializable))
 
 compose(message::T where T) = Message(serialize(message), content_type="text/plain", delivery_mode=PERSISTENT)
 
 send!(chan,exchange::String, message::T where T, routing_key::String) =
     basic_publish(chan, compose(message); exchange=exchange, routing_key=routing_key)
 
-send!(chan,exchange::String, message::T where T) =
+send!(chan, exchange::String, message::T where T) =
     send!(chan,exchange, message, "*")
 
 AckUnit(::Type{Message}, src) =
