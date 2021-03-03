@@ -20,6 +20,12 @@ struct AckUnit{T}
     ackFn::Function
 end
 
+val(unit::AckUnit{T} where T) = unit.val
+ack(unit::AckUnit{T} where T) = unit.ackFn()
+
+val(unit::Any) = unit
+ack(unit::Any) = nothing
+
 ack_source!(src::Source{T}) where T =
     source!(src) |> map(AckUnit{T}, AckUnit(T, src))
 
@@ -60,4 +66,4 @@ end
 
 Base.:|>(source, successFn::Function) = handle!(source, successFn)
 
-sink!(sinkFn::Function) = unit -> (sinkFn(unit.val);unit.ackFn())
+sink!(sinkFn::Function) = unit -> (sinkFn(val(unit));ack(unit))
