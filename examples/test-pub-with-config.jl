@@ -9,10 +9,6 @@ end
 
 v = collect(1:10000)
 
-open_sink_conn!()
-
 @async source!(IntSource(v)) |> sink!("testExchange")
 
 readline()
-
-close_sink_conn!()

@@ -32,6 +32,9 @@ function exchange_sink!(name::String)
 end
 
 function sink!(exchange_name::String)
+    if !is_sink_conn_open()
+        open_sink_conn!()
+    end
     exchange_sink = exchange_sink!(exchange_name)
     sink!(val -> exchange_sink.sendFn(val))
 end

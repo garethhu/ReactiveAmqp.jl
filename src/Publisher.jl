@@ -14,5 +14,7 @@ struct OutConnection
     end
 end
 
+_out_conn = nothing
 open_sink_conn!() = global _out_conn = OutConnection(_conn_def)
-close_sink_conn!() = close!(_out_conn)
+close_sink_conn!() = close_connection!(_out_conn.out_conn)
+is_sink_conn_open() = _out_conn == nothing ? false : isopen(_out_conn.out_conn)
