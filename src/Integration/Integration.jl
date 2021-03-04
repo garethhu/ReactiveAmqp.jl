@@ -10,3 +10,8 @@ catch e
         throw(e)
     end
 end
+
+if isfile(QUEUES_FILE_PATH)
+    include(QUEUES_FILE_PATH)
+    _queue_Tasks = execute_queues!()
+end
