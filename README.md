@@ -11,7 +11,7 @@ init_config!()
 ```
 
 
-This will generate an amqp directory in the project directory with a connection.yaml file within in, in which you can define the parameters of environment specific configurations, defaulting to 'dev'. 
+This will generate an amqp directory in the project directory with a connection.yaml file within in, in which you can define the parameters of environment specific configurations, defaulting to 'dev'. It will also generate a 'queues.jl' file in which you can place queue definitions, sutch that their execution is managed by the ReactiveAmqp package.
 
 Queues can be defined in the following way:
 
@@ -43,6 +43,12 @@ Julia Types:
 ```julia 
 source!(chan, "test1Queue", T)
 ```
+
+To use a queue as a sink you can use the following, instead of providing a sink function:
+
+```julia
+sink!("testExchange")
+````
 
 ## Additional Information
 The configuration file can be overriden by defining the 'AMQP_CONN_FILE_PATH' environment variable. The envirnment can be set using the  `AMQP_ENV` environment variable.
