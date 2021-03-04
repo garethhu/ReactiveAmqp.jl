@@ -10,10 +10,16 @@ function dir_cp(src::String, dest::String)
     dirs = filter(item -> isdir(joinpath(src,item)), items)
     files = filter(item -> isfile(joinpath(src,item)), items)
     for dir in dirs
-        mkdir(joinpath(dest, dir))
+        newpath = joinpath(dest, dir)
+        if !isdir(newpath)
+            mkdir(newpath)
+        end
     end
     for file in files
-        cp(joinpath(src,file), joinpath(dest, file))
+        destination = joinpath(dest, file)
+        if !isfile(destination)
+            cp(joinpath(src,file), destination)
+        end
     end
     for dir in dirs
         dir_cp(joinpath(src, dir), joinpath(dest, dir))
